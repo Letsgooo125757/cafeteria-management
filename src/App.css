@@ -1,0 +1,26 @@
+/* src/App.css */
+.App {
+  /* text-align: center; */ /* Keep or remove based on preference */
+  /* You might add some padding or other base styles */
+  padding-top: 60px; /* Example: Add padding so content isn't hidden under a fixed navbar */
+}
+
+/* Remove or comment out these if not used */
+/*
+.App-logo { ... }
+@media (prefers-reduced-motion: no-preference) { ... }
+.App-header { ... }
+.App-link { ... }
+@keyframes App-logo-spin { ... }
+*/
+
+/* Add styles for your pages if needed */
+/* Example: */
+/*
+form div {
+  margin-bottom: 10px;
+}
+label {
+  margin-right: 5px;
+}
+*/

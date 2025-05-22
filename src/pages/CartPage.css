@@ -1,0 +1,270 @@
+.cart-page-container {
+  max-width: 700px; 
+  margin: 40px auto; 
+  padding: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+}
+
+.cart-page-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.cart-empty-message {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  padding: 20px 0;
+}
+
+.cart-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0; 
+}
+
+.cart-item {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 0; 
+  border-bottom: 1px solid #eee; 
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-details {
+  flex-grow: 1; 
+  margin-right: 15px; 
+}
+
+.cart-item-details .item-name {
+  font-weight: 500; 
+  color: #444;
+  display: block; 
+  margin-bottom: 3px;
+}
+
+.cart-item-details .item-price {
+  font-size: 0.95rem;
+  color: #777;
+}
+
+.remove-button {
+  padding: 5px 10px;
+  background-color: #f44336; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  white-space: nowrap; 
+  margin-left: 10px;
+}
+
+.remove-button:hover {
+  background-color: #d32f2f; 
+}
+
+.checkout-button,
+.payment-button,
+.back-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 10px 5px;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.checkout-button:hover {
+  background-color: #45a049; 
+}
+
+.payment-options {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top:1px solid #eee;
+  text-align: center;
+}
+
+.payment-options h4 {
+  margin-bottom: 15px;
+}
+
+.payment-button.mpesa {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.payment-button.mpesa:hover {
+  background-color: #4cae4c; 
+}
+
+.payment-button.visa {
+  background-color: #337ab7;
+  color: white;
+}
+
+.payment-button.visa:hover {
+  background-color: #286090; 
+}
+
+.back-button {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #ec971f; 
+}
+
+.mpesa-form, .visa-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.mpesa-form h4, .visa-form h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-message,
+.processing-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.checkout-message.error,
+.processing-message {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+.checkout-message.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.loading-indicator {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+.post-checkout-actions {
+  margin-top: 15px;
+}
+
+.back-to-menu-button,
+.view-orders-button {
+  display: inline-block;
+  padding: 8px 15px;
+  margin: 5px;
+  background-color: #5bc0de;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.back-to-menu-button:hover,
+.view-orders-button:hover {
+  background-color: #31b0d5;
+}
+
+.cart-separator {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 20px 0;
+}
+
+.cart-total {
+  text-align: right; 
+  margin-bottom: 25px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.checkout-button {
+  display: block; 
+  width: 100%; 
+  padding: 12px;
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3; 
+}
+

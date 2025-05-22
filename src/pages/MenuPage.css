@@ -1,0 +1,106 @@
+.menu-page-container {  
+  background-color: bisque;  
+  width: auto-content; 
+  height: auto-content; 
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.menu-page-container h1 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.menu-page-container > p { 
+  text-align: center;
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Style the list container (ul) */
+.menu-list {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 20px; 
+}
+
+/* Style each menu item (li) */
+.menu-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.menu-item-image {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    display: block; 
+}
+
+.menu-item:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Style the item details (name and price) */
+.item-details {
+  padding: 15px;  
+  flex-grow: 1; 
+}
+
+.item-details .item-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 5px; 
+  display: block; 
+}
+
+.item-details .item-price {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Style the 'Add To Cart' button */
+.menu-item button {
+  padding: 8px 15px;
+  background-color: #28a745; 
+  color: white;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  margin: 0 15px 15px 15px;
+  display: block;
+  text-align: center;
+}
+
+.menu-item button:hover {
+  background-color: #218838; 
+}
+
+/* Style the cart count paragraph at the bottom */
+.cart-summary {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    font-weight: bold;
+}

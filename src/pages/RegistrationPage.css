@@ -1,0 +1,88 @@
+.registration-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.registration-container h1 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.registration-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.registration-container form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.registration-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.registration-container input[type="text"],
+.registration-container input[type="email"],
+.registration-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.registration-container input:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.registration-container button[type="submit"] {
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.registration-container button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.back-to-login-link {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.back-to-login-llink p {
+    margin: 0;
+}
+
+.back-to-login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-to-login-link a:hover {
+    text-decoration: underline;
+}
