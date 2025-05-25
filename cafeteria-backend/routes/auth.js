@@ -55,6 +55,9 @@ router.post('/register', async (req, res) => {
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
+    console.log('--- Login Request Start ---');
+    console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
+    console.log('Request Body (raw):', req.body);
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -92,6 +95,7 @@ router.post('/login', async (req, res) => {
                 profilePictureUrl: user.profilePictureUrl
             }
         });
+        console.log(' --- Login Request End (Success) ---');
     } catch (error) {
         console.error ('Login error:', error);
         res.status(500).json({ message: 'Server error during login.' });

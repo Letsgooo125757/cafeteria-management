@@ -18,28 +18,41 @@ router.post('/', protect, async (req, res) => {
         return res.status(403).json({ message: 'Admin access denied' });
     }
 
-    const { name, description, price, category, imageUrl } = req.body;
-        const menuItemData = {
-            name, 
-            description,
-            price, 
-            category,
-            imageUrl,
-            isAvailable
-        };
+    const { name, description, price, category, imageUrl, isAvailable: reqIsAvailable } = req.body;
+    
+    if (!name || name.trim() === '') {
+        return res.status(400).json({ message: 'Menu item name is required.' });
+    }
+    if (price === undefined || typeof price !== 'number' || price < 0) {
+        return res.status(400).json({ message: 'Price must be a valid non-negative number.' });
+    }
 
-        if (typeof req.body.isAvailable === 'boolean') {
-            menuItemData.isAvailable = req.body.isAvailable;
+    const menuItemData = {
+        name,
+        description,
+        price,
+        category,
+        imageUrl
+    };
+
+    if (typeof reqIsAvailable === 'boolean') {
+        menuItemData.isAvailable = reqIsAvailable;
+    } else {
+        menuItemData.isAvailable = true;
+    }
+
+    try {
+        const newItem = new MenuItem(menuItemData);
+        const menuItem = await newItem.save();
+        res.status(201).json(menuItem);
+    } catch (err) {
+        console.error(err.message);
+        if (err.name === 'ValidationError') {
+            return res.status(400).json({ message: err.message });
         }
 
-        try {
-            const newItem = new MenuItem(menuItemData);
-            const menuItem = await newItem.save();
-            res.json(menuItem);
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
-        }
+        res.status(500).send('Server Error');
+    }        
 });
 
 router.put('/:id', protect, async (req, res) => {
