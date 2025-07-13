@@ -1,0 +1,54 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    depends_on:
+      - cafeteria-backend
+    networks:
+      - cafeteria-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  
+  cafeteria-backend:
+    build:
+      context: ./cafeteria-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./cafeteria-backend:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - JWT_SECRET=admin12345
+      - MONGODB_URI=mongodb://mongodb:27017/cafeteria_db
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+    networks:
+      - cafeteria-network
+
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - cafeteria-network
+    environment:
+      - MONGO_INITDB_DATABASE=cafeteria_db
+
+volumes:
+  mongodb-data:
+
+networks:
+  cafeteria-network:
+   driver: bridge
+
+

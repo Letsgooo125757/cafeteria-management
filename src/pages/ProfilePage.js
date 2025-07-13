@@ -41,7 +41,7 @@ function ProfilePage({ onProfileUpdate, onLogout }) {
             }
 
             try {
-                const response = await fetch('http://localhost:5000/api/users/profile', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ function ProfilePage({ onProfileUpdate, onLogout }) {
                 headers['Content-Type'] = 'application/json';
             }
 
-            const response = await fetch('http://localhost:5000/api/users/profile', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
                 method: 'PUT',
                 headers: headers,
                 body: (selectedFile || !(formData instanceof FormData)) ? formData : JSON.stringify(Object.fromEntries(formData))
@@ -212,7 +212,7 @@ function ProfilePage({ onProfileUpdate, onLogout }) {
 
         setIsLoading(true);
         try{
-            const response = await fetch('http://localhost:5000/api/users/change-password', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/change-password`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type' : 'application/json',

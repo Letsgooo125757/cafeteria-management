@@ -1,0 +1,44 @@
+# syntax=docker/dockerfile:1
+
+# ---- Builder Stage ----
+# Use a specific Node.js version for reproducibility.
+FROM node:22.14.0-alpine AS builder
+
+# Set the working directory inside the container.
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to leverage Docker cache.
+COPY package*.json ./
+
+# Install dependencies without devDependencies for building the application.
+RUN npm ci
+
+# Copy the rest of the application source code.
+COPY . .
+
+# Build the React application for production.
+RUN npm run build
+
+# ---- Final Stage ----
+# Use a lightweight Node.js image for the final application.
+FROM node:22.14.0-alpine AS final
+
+# Set the environment for production.
+ENV NODE_ENV=production
+
+# Use the non-root 'node' user from the base image.
+USER node
+
+WORKDIR /usr/src/app
+
+# Copy only the built assets from the builder stage 
+# The --chown flag ensures the 'node' user owns these files.
+COPY --from=builder --chown=node:node /usr/src/app/build ./build
+
+# Expose the port the app runs on.
+EXPOSE 3000
+
+# The command to run the application
+# serve -s build serves the 'build' directory, perfect for singel-page apps
+CMD ["npx", "serve", "-s", "build", "-l", "3000"]
+# This command uses 'npx' to run 'serve' without needing to install it globally
