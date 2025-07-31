@@ -17,38 +17,85 @@ function LoginPage({onLogin}) {
             return;
         }
 
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await response.json();
+        // Dummy login credentials - for demo purposes
+        const dummyCredentials = [
+            { username: 'admin', password: 'admin123', role: 'admin', id: 1, name: 'Administrator' },
+            { username: 'user', password: 'user123', role: 'customer', id: 2, name: 'Regular User' },
+            { username: 'staff', password: 'staff123', role: 'staff', id: 3, name: 'Staff Member' },
+            { username: 'demo', password: 'demo', role: 'customer', id: 4, name: 'Demo User' }
+        ];
 
-            if (!response.ok) {
-                setError(data.message || `Error: ${response.status}`);
-                return;
+        // Get registered users from localStorage
+        const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        
+        // Combine dummy credentials with registered users for authentication
+        const allValidUsers = [
+            ...dummyCredentials,
+            ...registeredUsers.map(user => ({
+                username: user.username,
+                password: user.password,
+                role: user.role,
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }))
+        ];
+
+        // Find matching credentials (check both username and email for registered users)
+        const validUser = allValidUsers.find(user => {
+            // For dummy users, only check username
+            if (dummyCredentials.some(dummy => dummy.id === user.id)) {
+                return user.username === username && user.password === password;
             }
+            // For registered users, check both username and email
+            return (user.username === username || user.email === username) && user.password === password;
+        });
 
-            localStorage.setItem('token', data.token); // Store the token in local storage
-            localStorage.setItem('currentUser', JSON.stringify(data.user)); // Store user data in local storage
-            onLogin(data.user); // Call the onLogin function passed as a prop
+        if (validUser) {
+            // Simulate successful login
+            const dummyToken = `token-${validUser.id}-${Date.now()}`;
+            const userData = {
+                id: validUser.id,
+                username: validUser.username,
+                name: validUser.name,
+                role: validUser.role,
+                email: validUser.email || ''
+            };
+
+            localStorage.setItem('token', dummyToken); // Store the token
+            localStorage.setItem('currentUser', JSON.stringify(userData)); // Store user data
+            onLogin(userData); // Call the onLogin function passed as a prop
             navigate('/menu');
-        } catch (err) {
-            console.error('Login fetch error:', err);
-            setError('An error occurred while logging in. Please try again later.');
+        } else {
+            setError('Invalid username/email or password. You can register a new account or use demo credentials.');
         }
     };
 
     return (
         <div className="login-container">
             <h1>Login</h1>
+            
+            {/* Demo credentials info */}
+            <div className="demo-credentials">
+                <h3>🔑 Demo Credentials</h3>
+                <div className="credential-list">
+                    <p><strong>Admin:</strong> admin / admin123</p>
+                    <p><strong>User:</strong> user / user123</p>
+                    <p><strong>Staff:</strong> staff / staff123</p>
+                    <p><strong>Demo:</strong> demo / demo</p>
+                </div>
+                <p style={{textAlign: 'center', marginTop: '10px', fontSize: '0.9rem', color: '#666'}}>
+                    Or register a new account below!
+                </p>
+            </div>
+
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Username or Email:</label>
                     <input
                     type="text"
                     id="username"
+                    placeholder="Enter username or email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     />
