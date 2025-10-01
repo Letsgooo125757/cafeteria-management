@@ -9,6 +9,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import ForgotPasswordpage from './pages/ForgotPasswordpage';
 import ProfilePage from './pages/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute';
+import UserDataViewer from './components/UserDataViewer';
 
 
 function App() {
@@ -112,6 +113,9 @@ function App() {
 
         <Route path="*" element={<div><h2>404 Not Found</h2><Link to="/">Go Home</Link></div>} />
       </Routes>
+      
+      {/* Debug component - always available */}
+      <UserDataViewer />
     </div>
   );
 }

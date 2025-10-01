@@ -91,13 +91,13 @@ function CartPage ({ cartItems, onRemoveItem}) {
                 <ul>
                     {cartItems.map((item, index) => (
                         <li key={item._id ? `${item._id}-${index}` : index} className="cart-item">
-                            {item.name} - ${item.price.toFixed(2)}
+                            {item.name} - KSH {item.price}
                             {checkoutStep === 'cart' && <button onClick={() => handleRemove(item._id)} className="remove-button">Remove</button>}
                         </li>
                     ))}
                 </ul>
                 <hr />
-                <h3>Total: ${calculateTotal().toFixed(2)}</h3>
+                <h3>Total: KSH {calculateTotal()}</h3>
                 {checkoutStep === 'cart' && (
                     <button onClick={handleProceedToCheckout} className="checkout-button">Proceed To Checkout</button>
                 )}

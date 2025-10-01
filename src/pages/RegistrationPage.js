@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './RegistrationPage.css';
+import { userExists, addUser } from '../utils/userStorage';
 
 function RegistrationPage() {
     const [formData, setFormData] = useState({
@@ -34,23 +35,49 @@ function RegistrationPage() {
             return;
         }
 
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: formData.email, username: formData.username, password: formData.password })
-            });
-            const data = await response.json();
+        // Validate password strength (optional)
+        if (formData.password.length < 6) {
+            setError('Password must be at least 6 characters long.');
+            return;
+        }
 
-            if (!response.ok) {
-                setError(data.message || `Error: ${response.status}`);
+        try {
+            // Check if username or email already exists
+            if (userExists(formData.username, formData.email)) {
+                setError('Username or email already exists. Please choose different credentials.');
                 return;
             }
 
-            setSuccessMessage('Registration successful! You can now log in.');
-            setTimeout(() => navigate('/login'), 2000);
+            // Create new user object
+            const newUserData = {
+                email: formData.email,
+                username: formData.username,
+                password: formData.password, // In a real app, this should be hashed
+                name: formData.username, // Use username as display name
+                role: 'customer'
+            };
+
+            // Add new user
+            const newUser = addUser(newUserData);
+            
+            if (newUser) {
+                setSuccessMessage('Registration successful! Redirecting to login page...');
+                
+                // Clear form
+                setFormData({
+                    email: '',
+                    username: '',
+                    password: '',
+                    confirmPassword: ''
+                });
+                
+                setTimeout(() => navigate('/login'), 2000);
+            } else {
+                setError('Failed to register user. Please try again.');
+            }
+            
         } catch (err) {
-            console.error('Registration fetch error:', err);
+            console.error('Registration error:', err);
             setError('An error occurred while registering. Please try again later.');
         }
     }

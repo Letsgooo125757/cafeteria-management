@@ -101,3 +101,40 @@
 .register-link a:hover {
     text-decoration: underline;
 }
+
+/* Demo credentials styling */
+.demo-credentials {
+    background-color: #e8f4f8;
+    border: 1px solid #bee5eb;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.demo-credentials h3 {
+    margin: 0 0 10px 0;
+    color: #155724;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.credential-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.credential-list p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #0c5460;
+    padding: 4px 8px;
+    background-color: #d1ecf1;
+    border-radius: 4px;
+    border-left: 3px solid #bee5eb;
+}
+
+.credential-list strong {
+    color: #155724;
+}
